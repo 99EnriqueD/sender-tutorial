@@ -2,7 +2,7 @@
 
 ## Step 1
 
-Hello! In this lesson we will be programming the micro:bits you will be using to measure lung performance
+Hallo! hier komt wat nederlands hopelijk
 
 ```blocks
 basic.showString(":)")
@@ -10,7 +10,7 @@ basic.showString(":)")
 
 ## Step 2
 
-Bruhhhh
+Broerrrr
 
 ```blocks
 input.onButtonPressed(Button.A, function () {
