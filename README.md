@@ -12,7 +12,7 @@ This repository can be added as an **extension** in MakeCode.
 
 ## Tutorials
 
-[tutorial](/sender-tutorial/tutorial) [start]
+[tutorial](/sender-tutorial/tutorial) [start](https://makecode.microbit.org/#tutorial:github:99enriqued/sender-tutorial/tutorial)
 
 ## Edit this project ![Build status badge](https://github.com/99enriqued/sender-tutorial/workflows/MakeCode/badge.svg)
 
