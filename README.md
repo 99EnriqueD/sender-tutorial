@@ -1,6 +1,11 @@
 
 > Open this page at [https://99enriqued.github.io/sender-tutorial/](https://99enriqued.github.io/sender-tutorial/)
 
+## Tutorials
+
+[(This) Sender tutorial](/sender-tutorial/tutorial) [start](https://makecode.microbit.org/#tutorial:github:99enriqued/sender-tutorial/tutorial)
+[(Next) Receiver tutorial](https://makecode.microbit.org/#tutorial:github:99enriqued/receiver-tutorial/tutorial)
+
 ## Use as Extension
 
 This repository can be added as an **extension** in MakeCode.
@@ -9,10 +14,6 @@ This repository can be added as an **extension** in MakeCode.
 * click on **New Project**
 * click on **Extensions** under the gearwheel menu
 * search for **https://github.com/99enriqued/sender-tutorial** and import
-
-## Tutorials
-
-[tutorial](/sender-tutorial/tutorial) [start](https://makecode.microbit.org/#tutorial:github:99enriqued/sender-tutorial/tutorial)
 
 ## Edit this project ![Build status badge](https://github.com/99enriqued/sender-tutorial/workflows/MakeCode/badge.svg)
 
