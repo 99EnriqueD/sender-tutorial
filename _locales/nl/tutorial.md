@@ -10,7 +10,7 @@ basic.showString(":)")
 
 ## Step 2
 
-Broerrrr
+Nog meer nederlands
 
 ```blocks
 input.onButtonPressed(Button.A, function () {

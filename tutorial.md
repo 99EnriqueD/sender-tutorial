@@ -2,13 +2,13 @@
 
 ## Welcome
 
-Hello! In this lesson we will be programming the micro:bits you will be using to measure lung performance. 
+Hello! In this lesson we will be programming the micro:bits you will be using to measure lung capacity. 
 First we will write code that prepares the micro:bit for the game, then we will program the data measurements, and finally we will send the data to the teacher's micro:bit.
 Let's go!
 
 ## Setup 1
 
-First things first, let's make a ``||variable||`` with your team name! We will do this in the ``||basic:on start||`` block.
+First things first, let's make a ``||variables:team_name||`` variable with your team name! We will do this in the ``||basic:on start||`` block.
 
 ```blocks
 let team_name = "your team name"
@@ -50,7 +50,7 @@ function measureWind () {
 
 ## Measure 2
 
-TODO. For now just measure light level or something iduuno lol
+TODO. For now just measure ``||input:light level||`` or something idunno lol 
 
 ```blocks
 function measureWind () {
@@ -60,7 +60,7 @@ function measureWind () {
 
 ## Measure 3
 
-Now that we have measured and transformed the data, let's let anyone that calls our measure function and get this data.
+Now that we have measured and transformed the data, we should give this data so that it can be used outside of this function.
 We do this by using the ``||functions:return||`` the data.
 
 ```blocks
@@ -71,8 +71,8 @@ function measureWind () {
 
 ## Transmission 1
 
-Perfect, now our program can measure our lung performance!
-We need to know send our lung performance data to the teacher at all times.
+Perfect, now our program can measure our lung capacity!
+We need to now send our lung capacity data to the teacher at all times.
 We will start by continously calling our measure function in the 
 ``||basic:forever||`` block. Can you explain why?
 
@@ -84,7 +84,7 @@ basic.forever(function () {
 
 ## Transmission 2
 
-To give ourselves an advantage, we will have our own micro:bit tell us how high/low our measured lung performance is while it is being measured.
+To give ourselves an advantage, we will have our own micro:bit tell us how high/low our measured lung capacity is while it is being measured.
 Let's do this by adding a ``||led:plot bar graph||``. 
 At this point your virtual micro:bit in the editor should be flashing some of it's LEDs. 
 Play around with the light levels and the values you give for the bar graph. Can you explain what's going on?
@@ -103,6 +103,7 @@ basic.forever(function () {
 
 Finally we will send our data to the teacher.
 We send both our team name (we don't want to give points to the other teams!) and our data.
+How do you determine the 'up to' value?
 
 ```blocks
 basic.forever(function () {
