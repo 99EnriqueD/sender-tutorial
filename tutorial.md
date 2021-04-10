@@ -2,6 +2,22 @@
 
 ## Welcome
 
+## Setup
+
+## Measuring and transmission
+
+## Intermezzo 1
+
+## Lung capacity logic
+
+## Intermezzo 2
+
+## Feedback
+
+DEPRECATED : 
+
+## Welcome
+
 Hello! In this lesson we will be programming the micro:bits you will be using to measure lung capacity. 
 First we will write code that prepares the micro:bit for the game, then we will program the data measurements, and finally we will send the data to the teacher's micro:bit.
 Let's go!
