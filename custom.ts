@@ -6,7 +6,7 @@
 /**
  * Custom radio blocks
  */
-//% weight=100 color=#FF1493 icon=\uf09e
+//% weight=100 color=#FF1493
 namespace radio {
     
     /**
