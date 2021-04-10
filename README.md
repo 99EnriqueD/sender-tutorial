@@ -6,6 +6,13 @@
 [(This) Sender tutorial](/sender-tutorial/tutorial) [start](https://makecode.microbit.org/#tutorial:github:99enriqued/sender-tutorial/tutorial)
 [(Next) Receiver tutorial](https://makecode.microbit.org/#tutorial:github:99enriqued/receiver-tutorial/tutorial)
 
+## Custom Blocks
+
+```blocks
+radio.radio_propeller("",0)
+radio.radio_fev1("",0)
+```
+
 ## Use as Extension
 
 This repository can be added as an **extension** in MakeCode.

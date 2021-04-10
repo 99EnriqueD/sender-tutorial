@@ -10,7 +10,8 @@
         "main.ts",
         "README.md",
         "tutorial.md",
-        "_locales/nl/tutorial.md"
+        "_locales/nl/tutorial.md",
+        "custom.ts"
     ],
     "testFiles": [
         "test.ts"
