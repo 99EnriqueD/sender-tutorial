@@ -6,23 +6,14 @@ function calc_average () {
     }
     return sum / number_data_points
 }
-function send_fev1 (team_name: string, fev1: number) {
-    radio.sendValue("" + team_name + "." + "fev1", 0)
-    basic.pause(20)
-    radio.sendValue("" + team_name + "." + "fev1", fev1)
-    basic.pause(20)
-    radio.sendValue("" + team_name + "." + "fev1", 0)
-}
-function measure_propeller (team_name: string, ms: number) {
+function measure_propeller (ms: number) {
     start_time = control.millis()
     while (control.millis() < start_time + ms) {
         average = calc_average()
-        radio_propeller(team_name, average)
+        radio.radio_propeller(team_name, average)
     }
 }
-function radio_propeller (team_name: string, value: number) {
-    radio.sendValue("" + team_name + "." + "propeller", value)
-}
+
 let average = 0
 let start_time = 0
 let number_data_points = 0
@@ -32,9 +23,9 @@ let threshold = 5
 let team_name = "Team1"
 basic.forever(function () {
     if (pins.analogReadPin(AnalogPin.P1) >= threshold) {
-        measure_propeller(team_name, 500)
-        send_fev1(team_name, average)
-        measure_propeller(team_name, 2500)
+        measure_propeller(500)
+        radio.radio_fev1(team_name, average)
+        measure_propeller(2500)
     }
 })
 control.inBackground(function () {
