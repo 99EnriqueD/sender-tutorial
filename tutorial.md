@@ -47,7 +47,59 @@ radio.setGroup(5)
 radio.setTransmitPower(4)
 ```
 
-## Measuring and transmission
+## Propeller measuring 1
+
+Next we will program how the micro:bit will measure the speed that the propeller will spin. 
+This speed is proportional to the voltage which the motor will generate and this voltage is what we will be measuring.
+Let's start by creating a ``||measure_propeller||`` function. 
+
+```blocks
+function measure_propeller () {
+}
+```
+
+## Propeller measuring 2
+
+We will use our ``||measure_propeller||`` function to measure the voltage from the propeller for certain amounts of time.
+Add a parameter to ``||measure_propeller||`` so we can give it an amount of time in milliseconds to measure for.
+
+```blocks
+function measure_propeller (ms: number) {
+}
+```
+## Propeller measuring 2
+
+To measure the propeller for a certain amount of time, the micro:bit must keep track of time.
+It does this by looking at its clock. 
+Its clock is a bit different to what we humans use, it uses ``||control:millis (ms)||`` which gives it the amount of milliseconds that have passed since the micro:bit woke up.
+Set a new variable ``||variables:start_time||`` to ``||control:millis (ms)||``.
+
+```blocks
+function measure_propeller (ms: number) {
+    let start_time = control.millis()
+}
+```
+
+## Propeller measuring 3
+
+Now that we know the time when the function starts, we should make a ``||loops:while||`` loop with a condition that stops after the amount of ``||variables:ms||`` given as a parameter has passed.
+Think about what this means and try your best to program it yourself. 
+If you get stuck, don't worry, go ahead and look at the hint and ask the teacher if you don't understand the code.
+
+```blocks
+function measure_propeller (ms: number) {
+    start_time = control.millis()
+    while (control.millis() < start_time + ms) {
+    }
+}
+```
+
+## Propeller measuring 4
+
+In this while loop we should now measure our propeller and send our measurements over the radio to the teacher's micro:bit.
+Since the micro:bits measurements can be `noisy` (do you remember what this means?), we will average propeller measurements.
+We will put our code to average measurements in its own function ``||functions:calculate_average()||``. Go ahead and define this function.
+
 
 ## Intermezzo 1
 
