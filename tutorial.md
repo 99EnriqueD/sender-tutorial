@@ -38,9 +38,9 @@ radio.setGroup(5)
 
 ## Setup 4
 
-The last thing we will be setting is the ``||radio:transmit power||``. 
+The last thing we will be setting is the ``||radio:transmit power||`` of our radio. 
 The more power we transmit our data with, the further away from the teacher's micro:bit we can be. 
-More power will use more battery and we are very environmentally conscious and so we will only use about half of the maximum value which is more than enough for inside a classroom.
+More power will use more battery and we are very environmentally conscious so we will only use about half of the maximum value which is more than enough for inside a classroom.
 
 ```blocks
 let team_name = "your team name"
@@ -63,7 +63,8 @@ function measure_propeller () {
 ## Propeller measuring 2
 
 We will use our ``||functions:measure_propeller||`` function to measure the voltage from the propeller for certain amounts of time.
-Add a parameter to ``||functions:measure_propeller||`` so we can give it an amount of time in milliseconds to measure for.
+Add a parameter ``||variables:ms||`` to ``||functions:measure_propeller||`` so we can give it an amount of time in milliseconds to measure for.
+You can add parameters to functions by right-clicking on the function and selecting "Edit Function".
 
 ```blocks
 function measure_propeller (ms: number) {
@@ -117,7 +118,7 @@ function calculate_average () {
 ## Propeller measuring 5
 
 In the ``||loops:while||`` loop of our ``||functions:measure_propeller||`` function we can now use ``||functions:calculate_average()||`` by assuming it will return the average propeller voltage.
-Set a ``||variables:average||`` variable equal to ``||functions:call calculate_average||``.
+Set an ``||variables:average||`` variable equal to ``||functions:call calculate_average||``.
 
 ```blocks
 function measure_propeller (ms: number) {
