@@ -3,6 +3,8 @@
 ## Welcome
 
 Hello! In this lesson we will be programming the micro:bits you will be using to measure lung capacity. 
+If you have not yet followed the teacher/receiver tutorial, do so [here](https://makecode.microbit.org/#tutorial:github:99enriqued/receiver-tutorial/tutorial).
+This tutorial is a little more advanced but I'm sure you can do it! Be sure to ask your teacher if you get stuck.
 First we will write code that prepares the micro:bit for the game, then we will program the data measurements, and finally we will send the data to the teacher's micro:bit.
 Let's go!
 

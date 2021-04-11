@@ -3,9 +3,9 @@
 
 ## Tutorials
 
-[(This) Sender tutorial](/sender-tutorial/tutorial) [start](https://makecode.microbit.org/#tutorial:github:99enriqued/sender-tutorial/tutorial)
+[(Previous) Receiver tutorial](https://makecode.microbit.org/#tutorial:github:99enriqued/receiver-tutorial/tutorial)
 
-[(Next) Receiver tutorial](https://makecode.microbit.org/#tutorial:github:99enriqued/receiver-tutorial/tutorial)
+[(This) Sender tutorial](/sender-tutorial/tutorial) [start](https://makecode.microbit.org/#tutorial:github:99enriqued/sender-tutorial/tutorial)
 
 ## Custom Blocks
 

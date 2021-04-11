@@ -40,7 +40,6 @@ control.inBackground(function () {
                 `)
         } else {
             basic.showIcon(IconNames.Yes)
-            basic.pause(1000)
         }
     }
 })
