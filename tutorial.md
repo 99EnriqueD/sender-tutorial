@@ -2,7 +2,50 @@
 
 ## Welcome
 
-## Setup
+Hello! In this lesson we will be programming the micro:bits you will be using to measure lung capacity. 
+First we will write code that prepares the micro:bit for the game, then we will program the data measurements, and finally we will send the data to the teacher's micro:bit.
+Let's go!
+
+## Setup 1
+
+First things first, let's make a ``||variables:team_name||`` variable with your team name! We will do this in the ``||basic:on start||`` block.
+
+```blocks
+let team_name = "your team name"
+```
+
+## Setup 2
+
+Another variable we will need is a ``||variables:threshold||``. You will see why later but for now set it to `5`.
+
+```blocks
+let team_name = "your team name"
+let threshold = 5
+```
+
+## Setup 3
+
+Next we need to set our radio group correctly so that the teacher's micro:bit knows to listen to us.
+For this, look through the ``||radio:Radio||`` blocks.
+
+```blocks
+let team_name = "your team name"
+let threshold = 5
+radio.setGroup(5)
+```
+
+## Setup 4
+
+The last thing we will be setting is the ``||radio:transmit power||``. 
+The more power we transmit our data with, the further away from the teacher's micro:bit we can be. 
+More power will use more battery and we are very environmentally conscious and so we will only use about half of the maximum value which is more than enough for inside a classroom.
+
+```blocks
+let team_name = "your team name"
+let threshold = 5
+radio.setGroup(5)
+radio.setTransmitPower(4)
+```
 
 ## Measuring and transmission
 
