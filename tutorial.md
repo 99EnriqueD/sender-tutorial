@@ -51,7 +51,7 @@ radio.setTransmitPower(4)
 
 Next we will program how the micro:bit will measure the speed that the propeller will spin. 
 This speed is proportional to the voltage which the motor will generate and this voltage is what we will be measuring.
-Let's start by creating a ``||measure_propeller||`` function. 
+Let's start by creating a ``||functions:measure_propeller||`` function. 
 
 ```blocks
 function measure_propeller () {
@@ -60,8 +60,8 @@ function measure_propeller () {
 
 ## Propeller measuring 2
 
-We will use our ``||measure_propeller||`` function to measure the voltage from the propeller for certain amounts of time.
-Add a parameter to ``||measure_propeller||`` so we can give it an amount of time in milliseconds to measure for.
+We will use our ``||functions:measure_propeller||`` function to measure the voltage from the propeller for certain amounts of time.
+Add a parameter to ``||functions:measure_propeller||`` so we can give it an amount of time in milliseconds to measure for.
 
 ```blocks
 function measure_propeller (ms: number) {
@@ -98,7 +98,113 @@ function measure_propeller (ms: number) {
 
 In this while loop we should now measure our propeller and send our measurements over the radio to the teacher's micro:bit.
 Since the micro:bits measurements can be `noisy` (do you remember what this means?), we will average propeller measurements.
-We will put our code to average measurements in its own function ``||functions:calculate_average()||``. Go ahead and define this function.
+We will put our code to average measurements in its own function ``||functions:calculate_average()||``. 
+Go ahead and define this function and let it return a number (any number is okay for now).
+
+```blocks
+function measure_propeller (ms: number) {
+    start_time = control.millis()
+    while (control.millis() < start_time + ms) {
+    }
+}
+function calculate_average () {
+    return 0
+}
+```
+
+## Propeller measuring 5
+
+In the ``||loops:while||`` loop of our ``||functions:measure_propeller||`` function we can now use ``||functions:calculate_average()||`` by assuming it will return the average propeller voltage.
+Set a ``||variables:average||`` variable equal to ``||functions:call calculate_average||``.
+
+```blocks
+function measure_propeller (ms: number) {
+    start_time = control.millis()
+    while (control.millis() < start_time + ms) {
+        average = calculate_average()
+    }
+}
+function calculate_average () {
+    return 0
+}
+```
+
+## Propeller measuring 6
+
+Before programming the ``||functions:calculate_average||`` function, we can go ahead and add a ``||radio:radio send propeller voltage||`` to ``||functions:measure_propeller||``.
+This block will transmit the ``||variables:average||`` voltage of the propeller along with our ``||variables:team_name||`` so that the teacher knows who is sending these values.
+
+```blocks
+function measure_propeller (ms: number) {
+    start_time = control.millis()
+    while (control.millis() < start_time + ms) {
+        average = calculate_average()
+        radio.radio_propeller(team_name, average)
+    }
+}
+```
+
+## Propeller measuring 7
+
+Let's now program ``||functions:calculate_average||``.
+An average over a list of values is equal to the sum of all the values in the list divided by the number of values in the list.
+For example, the average of `[1,2,3]` is (1+2+3)/3 = 6/3 = 2.
+Start by setting two new variables, ``||variables:sum||`` and ``||variables:number_data_points||``. 
+Make ``||variables:sum||`` equal to 0 and ``||variables:number_data_points||`` equal to 1000.
+
+```blocks
+function calculate_average () {
+    sum = 0
+    number_data_points = 1000
+    return 0
+}
+```
+
+## Propeller measuring 8
+
+We now will add up 1000 propeller voltage data points.
+Let's use a ``||loops:repeat||`` loop for this.
+
+```blocks
+function calculate_average () {
+    sum = 0
+    number_data_points = 1000
+    for (let index = 0; index < number_data_points; index++) {
+    }
+    return 0
+}
+```
+
+## Propeller measuring 9
+
+In this ``||loops:repeat||`` loop we will now add a propeller voltage measurment to ``||variables:sum||``.
+The micro:bit gets the voltage from the propeller from pin 1 (bottom left of the micro:bit).
+The ``||pins:analogReadPin(AnalogPin.P1)||`` block does this for us.
+
+```blocks
+function calculate_average () {
+    sum = 0
+    number_data_points = 1000
+    for (let index = 0; index < number_data_points; index++) {
+        sum += pins.analogReadPin(AnalogPin.P1)
+    }
+    return 0
+}
+```
+
+## Propeller measuring
+
+Now we have all the information we need to actually ``||functions:return||`` the average of the propeller voltage.
+Remember, the average is equal to the sum of all data points over the number of data points...
+
+function calculate_average () {
+    sum = 0
+    number_data_points = 1000
+    for (let index = 0; index < number_data_points; index++) {
+        sum += pins.analogReadPin(AnalogPin.P1)
+    }
+    return sum / number_data_points
+}
 
 
 ## Intermezzo 1
