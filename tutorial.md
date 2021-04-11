@@ -38,7 +38,7 @@ radio.setGroup(5)
 
 ## Setup 4
 
-The last thing we will be setting is the ``||radio:transmit power||`` of our radio. 
+The last thing we will be setting is the ``||radio:transmit power||`` of our radio (look in the "more" section of the ``||radio:Radio||`` blocks). 
 The more power we transmit our data with, the further away from the teacher's micro:bit we can be. 
 More power will use more battery and we are very environmentally conscious so we will only use about half of the maximum value which is more than enough for inside a classroom.
 
