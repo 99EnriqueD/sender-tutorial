@@ -91,7 +91,7 @@ If you get stuck, don't worry, go ahead and look at the hint and ask the teacher
 
 ```blocks
 function measure_propeller (ms: number) {
-    start_time = control.millis()
+    let start_time = control.millis()
     while (control.millis() < start_time + ms) {
     }
 }
