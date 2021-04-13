@@ -145,6 +145,9 @@ function measure_propeller (ms: number) {
         radio.radio_propeller(team_name, average)
     }
 }
+function calculate_average () {
+    return 0
+}
 ```
 
 ## Propeller measuring 7
