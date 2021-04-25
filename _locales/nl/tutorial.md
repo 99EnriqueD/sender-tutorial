@@ -137,7 +137,7 @@ function gemiddelde_berekenen () {
 ## Propeller measuring 6
 
 Before programming the ``||functions:calculate_average||`` function, we can go ahead and add a ``||radio:radio send propeller voltage||`` to ``||functions:measure_propeller||``.
-This block will transmit the ``||variables:average||`` voltage of the propeller along with our ``||variables:team_name||`` so that the teacher knows who is sending these values.
+This block will transmit the ``||variables:average||`` voltage of the propeller along with our ``||variables:teamnaam||`` so that the teacher knows who is sending these values.
 
 ```blocks
 function measure_propeller (ms: number) {
@@ -147,37 +147,40 @@ function measure_propeller (ms: number) {
         radio.radio_propeller(team_name, average)
     }
 }
-function calculate_average () {
+function gemiddelde_berekenen () {
     return 0
 }
 ```
 
 ## Propeller measuring 7
 
-Let's now program ``||functions:calculate_average||``.
-An average over a list of values is equal to the sum of all the values in the list divided by the number of values in the list.
-For example, the average of `[1,2,3]` is (1+2+3)/3 = 6/3 = 2.
-Start by setting two new variables, ``||variables:sum||`` and ``||variables:number_data_points||``. 
-Make ``||variables:sum||`` equal to 0 and ``||variables:number_data_points||`` equal to 1000.
+
+
+Laten we nu ``||functions:gemiddelde_berekenen||`` programmeren.
+Een gemiddelde over een lijst met waarden is gelijk aan de som van alle waarden in de lijst gedeeld door het aantal waarden in de lijst.
+Het gemiddelde van '[1,2,3]' is bijvoorbeeld (1+2+3)/3 = 6/3 = 2.
+
+Begin met het instellen van twee nieuwe variabelen, ``||variables:som||`` and ``||variables:aantal_gegevenspunten||``. 
+Maak ``||variables:sum||`` gelijk aan 0 en ``||variables:aantal_gegevenspunten||`` gelijk aan 1000.
 
 ```blocks
-function calculate_average () {
-    sum = 0
-    number_data_points = 1000
+function gemiddelde_berekenen () {
+    som = 0
+    aantal_gegevensunten = 1000
     return 0
 }
 ```
 
 ## Propeller measuring 8
 
-We now will add up 1000 propeller voltage data points.
-Let's use a ``||loops:repeat||`` loop for this.
+We tellen nu 1000 propellerspanningsgegevenspunten op.
+Laten we een ``||loops:repeat||`` lus hiervoor gebruiken.
 
 ```blocks
-function calculate_average () {
-    sum = 0
-    number_data_points = 1000
-    for (let index = 0; index < number_data_points; index++) {
+function gemiddelde_berekenen () {
+    som = 0
+    aantal_gegevensunten = 1000
+    for (let index = 0; index < aantal_gegevensunten; index++) {
     }
     return 0
 }
@@ -185,16 +188,16 @@ function calculate_average () {
 
 ## Propeller measuring 9
 
-In this ``||loops:repeat||`` loop we will now add a propeller voltage measurment to ``||variables:sum||``.
-The micro:bit gets the voltage from the propeller from pin 1 (bottom left of the micro:bit).
-The ``||pins:analogReadPin(P1)||`` block does this for us.
+In deze ``||loops:repeat||`` lus voegen we nu propellerspanningsgegevenspunten toe aan ``||variables:som||``.
+De micro:bit krijgt de spanning van de propeller van pin 1 (linksonder in de micro:bit).
+Het ``||pins:analogReadPin(P1)||`` blok doet dit voor ons. 
 
 ```blocks
-function calculate_average () {
-    sum = 0
-    number_data_points = 1000
-    for (let index = 0; index < number_data_points; index++) {
-        sum += pins.analogReadPin(AnalogPin.P1)
+function gemiddelde_berekenen () {
+    som = 0
+    aantal_gegevensunten = 1000
+    for (let index = 0; index < aantal_gegevensunten; index++) {
+        som += pins.analogReadPin(AnalogPin.P1)
     }
     return 0
 }
@@ -202,42 +205,45 @@ function calculate_average () {
 
 ## Propeller measuring
 
-Now we have all the information we need to actually ``||functions:return||`` the average of the propeller voltage.
-Remember, the average is equal to the sum of all data points over the number of data points...
+Nu hebben we alle nodige informatie om daadwerkelijk de juiste gemiddelde spanning te retourneren.
+Vergeet niet dat het gemiddelde gelijk is aan de som van alle gegevenspunten over het aantal gegevenspunten...
 
 ```blocks
-function calculate_average () {
-    sum = 0
-    number_data_points = 1000
-    for (let index = 0; index < number_data_points; index++) {
-        sum += pins.analogReadPin(AnalogPin.P1)
+function gemiddelde_berekenen () {
+    som = 0
+    aantal_gegevensunten = 1000
+    for (let index = 0; index < aantal_gegevensunten; index++) {
+        som += pins.analogReadPin(AnalogPin.P1)
     }
-    return sum / number_data_points
+    return som / aantal_gegevenspunten
 }
 ```
 
+
 ## Intermezzo 1
 
-Whew, that was a lot of work. The good news is you're more than halfway there!
-So go ahead and give yourself and your teammates pats on the back, you deserve it!
+Amai, dat was veel werk. Het goede nieuws is dat je meer dan halverwege bent!
+Jij mag zeker tevreden zijn.
 
-Now we can use our ``||functions:measure_propeller||`` function to measure lung capacity (which is the whole point of the challenge)!
-To measure lung capacity we need to make a graph of our propeller speed (which will have the same shape as the voltage we are measuring).
-The important parts of the graph is the speed after half a second of blowing, the fev1 score, and the maximum speed of the graph.
+Nu kunnen we onze ``||functions:meet_propeller||`` functie gebruiken om longcapaciteit te meten (dat is het hele punt van de uitdaging)!
+Om de longcapaciteit te meten, moeten we een grafiek maken van onze propellersnelheid (die dezelfde vorm zal hebben als de spanning die we meten).
+De belangrijke onderdelen van de grafiek zijn de snelheid na een halve seconde blazen, de fev1-score, en de maximale snelheid van de grafiek.
+
 
 ## Lung capacity logic 1
-
-To know when we are blowing on the propeller, the voltage generated by the propeller should be above the ``||variables:threshold||`` we defined at the start of the lesson.
-Go ahead and write this condition in an ``||logic:if||`` statement in the ``||basic:forever||`` block.
+Om te weten wanneer we op de propeller blazen, moet de spanning die door de propeller wordt gegenereerd boven onze ``||variables:drempelwaarde||`` zijn.
+Ga je gang en schrijf deze voorwaarde in een ``||logica:if||`` blok in het ``||basic:de hele tijd||`` blok.
 
 ```blocks
 basic.forever(function () {
-    if (pins.analogReadPin(AnalogPin.P1) >= threshold) {
+    if (pins.analogReadPin(AnalogPin.P1) >= drempelwaarde) {
     }
 })
 ```
 
 ## Lung capacity logic 2
+
+Als we op de propeller blazen zitten we in het ``||logic:if||`` blok 
 
 When we are blowing on the propeller we will be in the ``||logic:if||`` statement where we will start measuring propeller voltages.
 Let's call ``||functions:measure_propeller||`` for half a second (how many milliseconds is that?). 
