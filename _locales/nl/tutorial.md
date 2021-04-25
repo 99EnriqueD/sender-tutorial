@@ -38,7 +38,7 @@ radio.setGroup(5)
 
 ## Setup 4
 
-Het laatste wat we gaan instellen is de ``||radio: zend macht||`` van onze radio (kijk in het gedeelte 'meer' van de ``||radio:Radio||`` blokken).
+Het laatste wat we gaan instellen is de ``||radio:uitzendkracht||`` van onze radio (kijk in het gedeelte 'meer' van de ``||radio:Radio||`` blokken).
 Hoe meer kracht we gebruiken om onze gegevens door te geven, hoe verder weg van de centrale micro:bit we kunnen zijn.
 Meer stroom zal meer batterij gebruiken en we zijn zeer milieubewust, dus we zullen slechts ongeveer de helft van de maximale waarde gebruiken. 
 Dit is normaal gezien meer dan genoeg voor in een klaslokaal.
@@ -85,7 +85,7 @@ function meet_propeller (ms: number) {
 
 ## Propeller measuring 3
 
-Nu we weten wanneer de functie begint, moeten we een ``||loops:while||`` lus met een voorwaarde die stopt na de hoeveelheid ``||variables:ms||`` gegeven als parameter is verstreken.
+Nu we weten wanneer de functie begint, moeten we een ``||loops:terwijl||`` lus met een voorwaarde die stopt na de hoeveelheid ``||variables:ms||`` gegeven als parameter is verstreken.
 Denk na over wat dit betekent en doe je best om het zelf te programmeren. 
 Als je vastloopt, maak je geen zorgen, kijk naar de hint en vraag de leraar.
 
@@ -99,7 +99,7 @@ function meet_propeller (ms: number) {
 
 ## Propeller measuring 4
 
-In deze while lus moeten we nu onze propeller meten en onze metingen via de radio naar de micro:bit van de leraar sturen.
+In deze ``||loops:terwijl||`` lus moeten we nu onze propeller meten en onze metingen via de radio naar de micro:bit van de leraar sturen.
 Omdat de micro:bits metingen ruis-achtig kunnen zijn (weet je nog wat dit betekent?), zullen we gemiddelde propellermetingen doen.
 We zetten onze code op gemiddelde metingen in zijn eigen functie ``||functions:gemiddelde_bereken()||``. 
 Definieer deze functie en laat deze een getal retourneren (gelijkwelk nummer is voorlopig in orde).
@@ -118,7 +118,7 @@ function gemiddelde_berekenen () {
 
 ## Propeller measuring 5
 
-In de ``||loops:while||`` lus van onze ``||functions:meet_propeller||`` functie kunnen we nu ``||functions:gemiddelde_berekenen||`` gebruiken door aan te nemen dat het de gemiddelde spanning zal teruggeven.
+In de ``||loops:terwijl||`` lus van onze ``||functions:meet_propeller||`` functie kunnen we nu ``||functions:gemiddelde_berekenen||`` gebruiken door aan te nemen dat het de gemiddelde spanning zal teruggeven.
 Stel een ``||variables:gemiddelde||`` variabele gelijk aan ``|| functies:aanroep gemiddelde_berekenen||``
 
 
@@ -158,7 +158,7 @@ Laten we nu ``||functions:gemiddelde_berekenen||`` programmeren.
 Een gemiddelde over een lijst met waarden is gelijk aan de som van alle waarden in de lijst gedeeld door het aantal waarden in de lijst.
 Het gemiddelde van '[1,2,3]' is bijvoorbeeld (1+2+3)/3 = 6/3 = 2.
 
-Begin met het instellen van twee nieuwe variabelen, ``||variables:som||`` and ``||variables:aantal_gegevenspunten||``. 
+Begin met het instellen van twee nieuwe variabelen, ``||variables:som||`` en ``||variables:aantal_gegevenspunten||``. 
 Maak ``||variables:sum||`` gelijk aan 0 en ``||variables:aantal_gegevenspunten||`` gelijk aan 1000.
 
 ```blocks
@@ -172,7 +172,7 @@ function gemiddelde_berekenen () {
 ## Propeller measuring 8
 
 We tellen nu 1000 propellerspanningsgegevenspunten op.
-Laten we een ``||loops:repeat||`` lus hiervoor gebruiken.
+Laten we een ``||loops:keer herhalen||`` lus hiervoor gebruiken.
 
 ```blocks
 function gemiddelde_berekenen () {
@@ -186,9 +186,9 @@ function gemiddelde_berekenen () {
 
 ## Propeller measuring 9
 
-In deze ``||loops:repeat||`` lus voegen we nu propellerspanningsgegevenspunten toe aan ``||variables:som||``.
+In deze ``||loops:keer herhallen||`` lus voegen we nu propellerspanningsgegevenspunten toe aan ``||variables:som||``.
 De micro:bit krijgt de spanning van de propeller van pin 1 (linksonder in de micro:bit).
-Het ``||pins:analogReadPin(P1)||`` blok doet dit voor ons. 
+Het ``||pins:lees analoog pin P1||`` blok doet dit voor ons. 
 
 ```blocks
 function gemiddelde_berekenen () {
@@ -230,7 +230,7 @@ De belangrijke onderdelen van de grafiek zijn de snelheid na een halve seconde b
 ## Lung capacity logic 1
 
 Om te weten wanneer we op de propeller blazen, moet de spanning die door de propeller wordt gegenereerd boven onze ``||variables:drempelwaarde||`` zijn.
-Ga je gang en schrijf deze voorwaarde in een ``||logica:if||`` blok in het ``||basic:de hele tijd||`` blok.
+Ga je gang en schrijf deze voorwaarde in een ``||logic:als||`` blok in het ``||basic:de hele tijd||`` blok.
 
 ```blocks
 basic.forever(function () {
@@ -241,7 +241,7 @@ basic.forever(function () {
 
 ## Lung capacity logic 2
 
-Als we op de propeller blazen zitten we in het ``||logic:if||`` blok waar we propellerspanningen gaan meten.
+Als we op de propeller blazen zitten we in het ``||logic:als||`` blok waar we propellerspanningen gaan meten.
 Laten we ``||functions:meet_propeller||`` oproepen gedurende een halve seconde (hoeveel milliseconden is dat?). 
 Dan sturen we onze fev1 score, die gelijk is aan de laatste waarde van ``||variables:gemiddelde||``, aan de leerkracht hun micro:bit met behulp van het ``||radio.radio send fev1||`` blok.
 
@@ -281,8 +281,8 @@ Op dit moment is het moeilijk te zeggen wanneer we moeten blazen of niet, dus we
 
 ```blocks
 function gemiddelde_berekenen () {
-    som = 0
-    aantal_gegevensunten = 1000
+    let som = 0
+    let aantal_gegevensunten = 1000
     for (let index = 0; index < aantal_gegevensunten; index++) {
         som += pins.analogReadPin(AnalogPin.P1)
     }
@@ -291,19 +291,14 @@ function gemiddelde_berekenen () {
 function meet_propeller (ms: number) {
     let begin_tijd = control.millis()
     while (control.millis() < begin_tijd + ms) {
-        gemiddelde = gemiddelde_berekenen()
+        let gemiddelde = gemiddelde_berekenen()
         radio.radio_propeller(teamnaam, gemiddelde)
     }
 }
-let gemiddelde = 0
-let begin_tijd = 0
-let aantal_gegevensunten = 0
-let som = 0
-let teamnaam = ""
+let teamnaam = "Team1"
 radio.setGroup(5)
 radio.setTransmitPower(5)
 let drempelwaarde = 5
-teamnaam = "Team1"
 basic.forever(function () {
     if (pins.analogReadPin(AnalogPin.P1) >= drempelwaarde) {
         meet_propeller(500)
@@ -317,7 +312,7 @@ basic.forever(function () {
 
 Om de rest van ons programma niet te belemmeren, laten we een ``||control:voer uit op de achtergrond||`` blok maken.
 Dit blok start op hetzelfde moment als het ``||basic:bij opstarten||`` blok maar we willen dat het altijd loopt zoals het ``||basic:de hele tijd||`` blok.
-We kunnen ervoor zorgen dat dit gebeurt door een ``||loops:while||`` lus met zijn toestand altijd ``|| logic:waar||``.
+We kunnen ervoor zorgen dat dit gebeurt door een ``||loops:terwijl||`` lus met zijn toestand altijd ``|| logic:waar||``.
 
 ```blocks
 control.inBackground(function () {
@@ -329,7 +324,7 @@ control.inBackground(function () {
 ## Feedback 2
 
 We willen dat de LED's van onze micro:bit verschillende pictogrammen tonen, een voor wanneer de propeller klaar is om op te worden geblazen en een wanneer het programma bezig is.
-Splits deze twee zaken op door een ``||logic:if then else||`` blok te gebruiken.
+Splits deze twee zaken op door een ``||logic:als dan anders||`` blok te gebruiken.
 Kijk naar je ``||basic:de hele tijd||`` blok voor een hint over wat de voorwaarde voor dit blok zou moeten zijn...
 
 ```blocks
