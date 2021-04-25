@@ -2,18 +2,9 @@
 
 ## Step 1
 
-Hallo! hier komt wat nederlands hopelijk
+Hallo! De nederlandse versie van deze cursus zal binnen een paar uur klaar zijn! Probeer later nog eens aub
 
 ```blocks
 basic.showString(":)")
 ```
 
-## Step 2
-
-Nog meer nederlands
-
-```blocks
-input.onButtonPressed(Button.A, function () {
-    radio.sendString("B")
-})
-```
