@@ -136,15 +136,15 @@ function gemiddelde_berekenen () {
 
 ## Propeller measuring 6
 
-Before programming the ``||functions:calculate_average||`` function, we can go ahead and add a ``||radio:radio send propeller voltage||`` to ``||functions:measure_propeller||``.
-This block will transmit the ``||variables:average||`` voltage of the propeller along with our ``||variables:teamnaam||`` so that the teacher knows who is sending these values.
+Voor het programmeren van de ``||functions:gemiddelde_berekenen||`` functie, kunnen we doorgaan en een ``||radio:radio send propeller voltage||`` toevoegen in ``||functions:meet_propeller||``.
+Dit blok verzendt de ``||variables:gemiddelde||`` spanning van de propeller samen met onze ``||variables:teamnaam||`` zodat de leerkracht weet wie deze waarden stuurt.
 
 ```blocks
-function measure_propeller (ms: number) {
-    start_time = control.millis()
-    while (control.millis() < start_time + ms) {
-        average = calculate_average()
-        radio.radio_propeller(team_name, average)
+function meet_propeller (ms: number) {
+    let begin_tijd = control.millis()
+    while (control.millis() < begin_tijd + ms) {
+        gemiddelde = gemiddelde_berekenen()
+        radio.radio_propeller(teamnaam, gemiddelde)
     }
 }
 function gemiddelde_berekenen () {
@@ -153,8 +153,6 @@ function gemiddelde_berekenen () {
 ```
 
 ## Propeller measuring 7
-
-
 
 Laten we nu ``||functions:gemiddelde_berekenen||`` programmeren.
 Een gemiddelde over een lijst met waarden is gelijk aan de som van alle waarden in de lijst gedeeld door het aantal waarden in de lijst.
@@ -229,8 +227,8 @@ Nu kunnen we onze ``||functions:meet_propeller||`` functie gebruiken om longcapa
 Om de longcapaciteit te meten, moeten we een grafiek maken van onze propellersnelheid (die dezelfde vorm zal hebben als de spanning die we meten).
 De belangrijke onderdelen van de grafiek zijn de snelheid na een halve seconde blazen, de fev1-score, en de maximale snelheid van de grafiek.
 
-
 ## Lung capacity logic 1
+
 Om te weten wanneer we op de propeller blazen, moet de spanning die door de propeller wordt gegenereerd boven onze ``||variables:drempelwaarde||`` zijn.
 Ga je gang en schrijf deze voorwaarde in een ``||logica:if||`` blok in het ``||basic:de hele tijd||`` blok.
 
@@ -243,84 +241,83 @@ basic.forever(function () {
 
 ## Lung capacity logic 2
 
-Als we op de propeller blazen zitten we in het ``||logic:if||`` blok 
+Als we op de propeller blazen zitten we in het ``||logic:if||`` blok waar we propellerspanningen gaan meten.
+Laten we ``||functions:meet_propeller||`` oproepen gedurende een halve seconde (hoeveel milliseconden is dat?). 
+Dan sturen we onze fev1 score, die gelijk is aan de laatste waarde van ``||variables:gemiddelde||``, aan de leerkracht hun micro:bit met behulp van het ``||radio.radio send fev1||`` blok.
 
-When we are blowing on the propeller we will be in the ``||logic:if||`` statement where we will start measuring propeller voltages.
-Let's call ``||functions:measure_propeller||`` for half a second (how many milliseconds is that?). 
-Then we will send our fev1 score, which is equal to the latest value of ``||variables:average||``, to the teacher using the ``||radio.radio send fev1||`` block.
 
 ```blocks
 basic.forever(function () {
-    if (pins.analogReadPin(AnalogPin.P1) >= threshold) {
-        measure_propeller(500)
-        radio.radio_fev1(team_name, average)
+    if (pins.analogReadPin(AnalogPin.P1) >= drempelwaarde) {
+        meet_propeller(500)
+        radio.radio_fev1(teamnaam, gemiddelde)
     }
 })
 ```
 
 ## Lung capacity logic 3
 
-After we have sent the fev1 score, we will continue measuring propeller voltage untill it stops spinning.
-We'll make it easy for ourselves by assuming that the proppeller will stop spinning after two and a half seconds.
-Call ``||functions:measure_propeller||`` for two and a half seconds (in milliseconds, of course).
+Nadat we de fev1-score hebben verzonden, blijven we de propellerspanning meten totdat deze stopt met draaien.
+We maken het onszelf gemakkelijk door aan te nemen dat de proppeller na tweeënhalve seconde stopt met draaien.
+Roep ``||functions:meet_propeller||`` op gedurende tweeënhalve seconde (in milliseconden natuurlijk).
 
 ```blocks
 basic.forever(function () {
-    if (pins.analogReadPin(AnalogPin.P1) >= threshold) {
-        measure_propeller(500)
-        radio.radio_fev1(team_name, average)
-        measure_propeller(2500)
+    if (pins.analogReadPin(AnalogPin.P1) >= drempelwaarde) {
+        meet_propeller(500)
+        radio.radio_fev1(teamnaam, gemiddelde)
+        meet_propeller(2500)
     }
 })
 ```
 
 ## Intermezzo 2
 
-Our micro:bit should actually be ready for the challenge now! 
-It measures the voltage from the propeller and sends these values to the teacher's micro:bit along with our team name.
-Click on the hint and check if your blocks do the same things as the shown hint blocks.
+Onze micro:bit zou nu eigenlijk klaar moeten zijn voor de uitdaging! 
+Het meet de spanning van de propeller en stuurt deze waarden naar de micro:bit van de leraar, samen met onze teamnaam.
+Klik op de hint en controleer of je blokken dezelfde dingen doen als de getoonde hintblokken en wat zijn zouden moeten doen.
 
-Right now it is hard to tell when we should blow or not however so we will now use our micro:bit's LEDs to give us some feedback.
+Op dit moment is het moeilijk te zeggen wanneer we moeten blazen of niet, dus we zullen nu de LED's van onze micro:bit gebruiken om ons wat feedback te geven.
 
 ```blocks
-function calculate_average () {
-    sum = 0
-    number_data_points = 1000
-    for (let index = 0; index < number_data_points; index++) {
-        sum += pins.analogReadPin(AnalogPin.P1)
+function gemiddelde_berekenen () {
+    som = 0
+    aantal_gegevensunten = 1000
+    for (let index = 0; index < aantal_gegevensunten; index++) {
+        som += pins.analogReadPin(AnalogPin.P1)
     }
-    return sum / number_data_points
+    return som / aantal_gegevenspunten
 }
-function measure_propeller (ms: number) {
-    start_time = control.millis()
-    while (control.millis() < start_time + ms) {
-        average = calculate_average()
-        radio.radio_propeller(team_name, average)
+function meet_propeller (ms: number) {
+    let begin_tijd = control.millis()
+    while (control.millis() < begin_tijd + ms) {
+        gemiddelde = gemiddelde_berekenen()
+        radio.radio_propeller(teamnaam, gemiddelde)
     }
 }
-let average = 0
-let start_time = 0
-let number_data_points = 0
-let sum = 0
-let team_name = ""
+let gemiddelde = 0
+let begin_tijd = 0
+let aantal_gegevensunten = 0
+let som = 0
+let teamnaam = ""
 radio.setGroup(5)
 radio.setTransmitPower(5)
-let threshold = 5
-team_name = "Team1"
+let drempelwaarde = 5
+teamnaam = "Team1"
 basic.forever(function () {
-    if (pins.analogReadPin(AnalogPin.P1) >= threshold) {
-        measure_propeller(500)
-        radio.radio_fev1(team_name, average)
-        measure_propeller(2500)
+    if (pins.analogReadPin(AnalogPin.P1) >= drempelwaarde) {
+        meet_propeller(500)
+        radio.radio_fev1(teamnaam, gemiddelde)
+        meet_propeller(2500)
     }
 })
 ```
 
 ## Feedback 1
 
-To not interfere with the rest of our program, let's make a ``||control:run in background||`` block.
-This block will start at the same time as the ``||basic:on start||`` but we want it to always be running like the ``||basic:forever||`` block.
-We can make sure this happens by adding a ``||loops:while||`` loop with its condition always ``||logic:true||``.
+Om de rest van ons programma niet te belemmeren, laten we een ``||control:voer uit op de achtergrond||`` blok maken.
+Dit blok start op hetzelfde moment als het ``||basic:bij opstarten||`` blok maar we willen dat het altijd loopt zoals het ``||basic:de hele tijd||`` blok.
+We kunnen ervoor zorgen dat dit gebeurt door een ``||loops:while||`` lus met zijn toestand altijd ``|| logic:waar||``.
 
 ```blocks
 control.inBackground(function () {
@@ -331,14 +328,14 @@ control.inBackground(function () {
 
 ## Feedback 2
 
-We want to our micro:bit's LEDs to show different icons, one for when the propeller is ready to be blown on and one when the program is busy.
-Split up these two cases by adding an ``||logic:if then else||`` block.
-Look at your ``||basic:forever||`` block for a hint as to what the condition for this block should be...
+We willen dat de LED's van onze micro:bit verschillende pictogrammen tonen, een voor wanneer de propeller klaar is om op te worden geblazen en een wanneer het programma bezig is.
+Splits deze twee zaken op door een ``||logic:if then else||`` blok te gebruiken.
+Kijk naar je ``||basic:de hele tijd||`` blok voor een hint over wat de voorwaarde voor dit blok zou moeten zijn...
 
 ```blocks
 control.inBackground(function () {
     while (true) {
-        if (average < threshold) {
+        if (gemiddelde < drempelwaarde) {
         } else {
         }
     }
@@ -347,7 +344,7 @@ control.inBackground(function () {
 
 ## Feedback 3
 
-Now add an ``||basic:show icon||``, or draw one yourself with ``||basic:show leds||``, for each case.
+Voeg nu een ``||basic:toon pictogram||`` blok toe of teken er zelf een met ``||basic:toon lichtjes||`` voor elk geval.
 
 ```blocks
 control.inBackground(function () {
@@ -369,8 +366,8 @@ control.inBackground(function () {
 
 ## Finish
 
-Your project is all done now! Test it out on your real or virtual micro:bit. 
-For the virtual micro:bit, you can change the voltage on the pins by dragging up or down the pin.
-Great programming today, I hope you're as excited as I am for the challenge! 
+Uw project is nu klaar! Test het uit op je echte of virtuele micro:bit. 
+Voor de virtuele micro:bit kunt u de spanning op de pinnen wijzigen door de pin omhoog of omlaag te slepen.
+Goed gewerkt, ik hoop dat je net zo enthousiast bent als ik voor de uitdaging!
 
 <script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("{{ site.makecode.home_url }}", "{{ site.github.owner_name }}/{{ site.github.repository_name }}");</script>
