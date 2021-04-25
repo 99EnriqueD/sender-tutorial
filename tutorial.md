@@ -323,7 +323,7 @@ control.inBackground(function () {
 
 ## Feedback 2
 
-We want to our micro:bit's LEDs to show different icons, one for when the propeller is ready to be blown on and one when the program is busy.
+We want that our micro:bit's LEDs to show different icons, one for when the propeller is ready to be blown on and one when the program is busy.
 Split up these two cases by adding an ``||logic:if then else||`` block.
 Look at your ``||basic:forever||`` block for a hint as to what the condition for this block should be...
 
